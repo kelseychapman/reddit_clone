@@ -1,9 +1,74 @@
 // create the module
 const app = angular.module('redditApp', []);
 
-app.controller('mainController', ['$scope', function($scope){
+app.controller('MainController', ['$scope','$log',function($scope,$log){
 
 
+
+	$scope.formHandler = function() {
+	if ($scope.newPost.$valid) {
+		let post = {
+			image: $scope.newPost.postImageUrl.$modelValue,
+			title: $scope.newPost.postTitle.$modelValue,
+			upvotes: 0,
+			author: $scope.newPost.postAuthor.$modelValue,
+			body: $scope.newPost.postBody.$modelValue,
+			date: Date.now(),
+			comments : []
+		}
+		$scope.posts.push(post);
+		$scope.newPost.$setPristine();
+	}
+}
+
+
+	//drop down sorting menu in nav
+  $scope.sortByDate = function() {
+    $scope.sort = {
+      method: '-date',
+      sortName: 'Date'
+    }
+  }
+  $scope.sortByTitle = function() {
+    $scope.sort = {
+      method: 'title',
+      sortName: 'Title'
+    }
+  }
+
+//toggle form for submitting a post
+$scope.showForm = false
+$scope.toggleForm = function (){
+	$log.info('before', $scope.showForm);
+		$scope.showForm = !$scope.showForm
+			$log.info('after', $scope.showForm);
+}
+
+
+	//upvotes and down votes
+	$scope.upvotePost = function(post) {
+    post.upvotes++;
+  }
+
+  $scope.downvotePost = function(post) {
+    post.upvotes--;
+  }
+
+
+	$scope.sort = {
+	    method: '-upvotes',
+	    sortName: 'Votes'
+	  }
+
+	$scope.sortByVotes = function() {
+	  $scope.sort = {
+	      method: '-upvotes',
+	      sortName: 'Votes'
+	    }
+	  }
+
+
+//seeding post info
 	$scope.posts = [
 	   {
 	     image: "http://www.clipartkid.com/images/156/light-blue-square-clip-art-at-clker-com-vector-clip-art-online-KB2hYi-clipart.png",
@@ -66,7 +131,7 @@ app.controller('mainController', ['$scope', function($scope){
 	     date: Date.parse('Thurs, 06 Oct 2016 00:00:00'),
 	     commentsVisible: false,
 	     commentFormVisible: false,
-	     comments : comments : [
+	     comments : [
 	       {
 	         author: 'Comment Author Name',
 	         text: 'I love teal.'
@@ -74,4 +139,4 @@ app.controller('mainController', ['$scope', function($scope){
 	     ]
 	   }
 	 ]
-	});
+ }]);
