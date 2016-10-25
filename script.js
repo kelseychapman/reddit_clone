@@ -3,78 +3,7 @@ const app = angular.module('myApp', []);
 
 app.controller('mainController', ['$scope', function($scope){
 
-	$scope.postFormVisible = false;
-  $scope.commentVisible = false;
 
-  $scope.formShow = function() {
-    if ($scope.postFormVisible === false) {
-      $scope.postFormVisible = true;
-    } else {
-      $scope.postFormVisible = false;
-    }
-  }
-
-  $scope.toggleCommentForm = function(post) {
-    if (post.commentFormVisible === false) {
-      post.commentFormVisible = true;
-    } else {
-      post.commentFormVisible = false;
-    }
-  }
-
-  $scope.upvotePost = function(post) {
-    post.upvotes++;
-  }
-
-  $scope.downvotePost = function(post) {
-    post.upvotes--;
-  }
-
-  $scope.commentShow = function(post) {
-    if (post.commentsVisible === false) {
-      post.commentsVisible = true;
-    } else {
-      post.commentsVisible = false;
-    }
-  }
-
-  $scope.formHandler = function() {
-    if ($scope.newPost.$valid) {
-      let post = {
-        image: $scope.newPost.postImageUrl.$modelValue,
-        title: $scope.newPost.postTitle.$modelValue,
-        upvotes: 0,
-        author: $scope.newPost.postAuthor.$modelValue,
-        body: $scope.newPost.postBody.$modelValue,
-        date: Date.now(),
-        commentsVisible: false,
-        commentFormVisible: false,
-        comments : []
-      }
-      $scope.posts.push(post);
-      $scope.postFormVisible = false;
-      $scope.postImageUrl = '';
-      $scope.postTitle = '';
-      $scope.postAuthor = '';
-      $scope.postBody = '';
-      $scope.newPost.$setPristine();
-    }
-  }
-
-  $scope.addComment = function(post, commentForm) {
-    if (commentForm.$valid) {
-      let comment = {
-        author: $scope.commentAuthor,
-        text: $scope.commentText
-      }
-      post.comments.push(comment);
-      $scope.toggleCommentForm(post);
-      $scope.commentShow(post);
-      commentForm.$setPristine();
-      $scope.commentAuthor = '';
-      $scope.commentText = '';
-    }
-  }
 
   $scope.sort = {
     method: '-upvotes',
