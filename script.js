@@ -1,33 +1,8 @@
 // create the module
-const app = angular.module('myApp', []);
+const app = angular.module('redditApp', []);
 
 app.controller('mainController', ['$scope', function($scope){
 
-
-
-  $scope.sort = {
-    method: '-upvotes',
-    prettyName: 'Votes'
-  }
-
-  $scope.sortByVotes = function() {
-    $scope.sort = {
-      method: '-upvotes',
-      prettyName: 'Votes'
-    }
-  }
-  $scope.sortByDate = function() {
-    $scope.sort = {
-      method: '-date',
-      prettyName: 'Date'
-    }
-  }
-  $scope.sortByTitle = function() {
-    $scope.sort = {
-      method: 'title',
-      prettyName: 'Title'
-    }
-  }
 
 	$scope.posts = [
 	   {
