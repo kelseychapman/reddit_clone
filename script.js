@@ -3,6 +3,7 @@ const app = angular.module('redditApp', []);
 
 app.controller('MainController', ['$scope','$log',function($scope,$log){
 
+// $scope.view.search = ''
 
 
 	$scope.formHandler = function() {

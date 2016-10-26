@@ -33,10 +33,9 @@
                     </li>
                 </ul>
                 <div class="collapse navbar-collapse" id="navbar">
-                    <form class="navbar-form navbar-left" role="search">
+                    <form class="navbar-form navbar-left">
                         <div class="form-group">
-                            <label id='find'>Find:</label>
-                            <input class='form-control' ng-model="query">
+                            <input type="text" class="form-control" placeholder="Search" ng-model="search">
                         </div>
                     </form>
                     <ul class="nav navbar-nav">
@@ -109,37 +108,38 @@
                         <!--end of post-->
 
                     </div>
-</div>
-                    <!--Start of comments row in posts box-->
-                    <div class="row date-comments">
-                        <div>
-                            <p>{{post.date}}</p>
-<hr>
-                            <!-- toggle comment show -->
-                            <div ng-app="ngAnimate">
-                              <div class="comment-link" ng-click="commentShow(post)"><span class="glyphicon glyphicon-comment"></span>
-                                  <ng-pluralize count="post.comments.length" when="{'0': '{} Comments',
+                </div>
+                <!--Start of comments row in posts box-->
+                <div class="row date-comments">
+                    <div>
+                        <p>{{post.date}}</p>
+                        <hr>
+                        <!-- toggle comment show -->
+                        <div ng-app="ngAnimate">
+                            <div class="comment-link" ng-click="commentShow(post)"><span class="glyphicon glyphicon-comment"></span>
+                                <ng-pluralize count="post.comments.length" when="{'0': '{} Comments',
                                     'one': '{} Comment',
                                     'other': '{} Comments'}">
-                                  </ng-pluralize>
-                              <input type="checkbox" ng-model="checked" aria-label="Toggle ngHide"><br/>
-                              <div class="check-element animate-show" ng-show="checked">
-                                <div ng-repeat="comment in post.comments">
-                                      <div class="row author">
-                                          <p class="pull-right">By {{comment.author}}</p>
-                                      </div>
-                                      <div class="row body">
-                                          <p>{{comment.text}}</p>
-                                      </div>
+                                </ng-pluralize>
+                                <input type="checkbox" ng-model="checked" aria-label="Toggle ngHide">
+                                <br/>
+                                <div class="check-element animate-show" ng-show="checked">
+                                    <div ng-repeat="comment in post.comments">
+                                        <div class="row author">
+                                            <p class="pull-right">By {{comment.author}}</p>
+                                        </div>
+                                        <div class="row body">
+                                            <p>{{comment.text}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                          </div>
-                          <!-- toggle checkbox example -->
+                        </div>
+                        <!-- toggle checkbox example -->
 
-                            <!--comment show-->
-                            <!-- <div ng-repeat="comment in post.comments">
+                        <!--comment show-->
+                        <!-- <div ng-repeat="comment in post.comments">
                                   <div class="row author">
                                       <p class="pull-right">By {{comment.author}}</p>
                                   </div>
@@ -149,13 +149,13 @@
                                 </div>
                             </div> -->
 
-                            <!--add comment-->
-                              <hr>
-                            <div class="comment-link">
-                              <span class="glyphicon glyphicon-pencil"></span> Add Comment
-                            </div>
+                        <!--add comment-->
+                        <hr>
+                        <div class="comment-link">
+                            <span class="glyphicon glyphicon-pencil"></span> Add Comment
                         </div>
                     </div>
+                </div>
 
             </div>
             <!-- End of Post Box-->
@@ -167,6 +167,47 @@
 
     </div>
 
+
+
+    <!-- <div ng-repeat="post in postArray | orderBy: sort | filter: search">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card">
+                            <div class="card-image"> -->
+                                <!-- <img src="images/sample-1.jpg"> -->
+                                <!-- <span class="card-title">Card Title</span> -->
+                            <!-- </div>
+                            <div class="card-content">
+                                <ul>
+                                    <img class="postImage" ng-src="{{post.image}}">
+                                    <div>Title: {{post.title}}</div>
+                                    <div>Author: {{post.author}}</div>
+                                    <div>Date: {{post.date}}</date>
+                                        <div>Post: {{post.description}}</div>
+                                        <br> -->
+                                        <div>
+                                          <span class="row"><a href="#" ng-click="upVote(post)"><i class="small material-icons iconColor">thumb_up</i></a>
+                                            <a href="#" ng-click="downVote(post)"><i class="small material-icons iconColor">thumb_down</i></a>
+                                            <h5 ng-class="{redVote: post.votes < 0, greenVote: post.votes >0, zero: post.votes == 0}">{{post.votes}}</h5></div>
+                                        <a href="#" ng-click="showCommentForm = !showCommentForm"><i class="small material-icons iconColor">comment</i></a>
+                                        <h5>{{post.numberOfComments}} comments: {{post.comments}}</h5></span>
+                                      </div>
+                                <!-- </ul>
+                                <div class="card" ng-show="showCommentForm">
+                                    <div class="card-content">
+                                        <form name="newComment" ng-submit="submitNewComment(comment.$valid)" novalidate>
+                                            <label for="comment">comment: </label>
+                                            <input type="text" name="comment" ng-model="post.comment" ng-required="true">
+                                            <input type="submit" ng-click="showCommentForm = false">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         -->
     <!-- scripts -->
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
