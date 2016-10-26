@@ -39,9 +39,9 @@ app.controller('MainController', ['$scope','$log',function($scope,$log){
 //toggle form for submitting a post
 $scope.showForm = false
 $scope.toggleForm = function (){
-	$log.info('before', $scope.showForm);
+	// $log.info('before', $scope.showForm);
 		$scope.showForm = !$scope.showForm
-			$log.info('after', $scope.showForm);
+			// $log.info('after', $scope.showForm);
 }
 
 
@@ -60,6 +60,7 @@ $scope.toggleForm = function (){
 	    sortName: 'Votes'
 	  }
 
+
 	$scope.sortByVotes = function() {
 	  $scope.sort = {
 	      method: '-upvotes',
@@ -67,6 +68,13 @@ $scope.toggleForm = function (){
 	    }
 	  }
 
+		$scope.commentShow = function(post) {
+	    if (post.commentsVisible === false) {
+	      post.commentsVisible = true;
+	    } else {
+	      post.commentsVisible = false;
+	    }
+	  }
 
 //seeding post info
 	$scope.posts = [
@@ -139,4 +147,12 @@ $scope.toggleForm = function (){
 	     ]
 	   }
 	 ]
+
+
+
+
+
+
+
+
  }]);

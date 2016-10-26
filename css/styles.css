@@ -1,0 +1,24 @@
+form.ng-submitted input.ng-invalid-required {
+  border-color: red;
+}
+
+.error {
+  font-style: italic;
+  color: red;
+}
+
+.title > h3 {
+  margin-top: 0;
+}
+
+.title > h3 > .positive {
+  color: green;
+}
+
+.title > h3 > .zero {
+  color: #333;
+}
+
+.title > h3 > .negative {
+  color: red;
+}

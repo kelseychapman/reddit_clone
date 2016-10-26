@@ -3,8 +3,10 @@
 
 <head>
     <!-- styles -->
+    <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+
 
 </head>
 
@@ -75,20 +77,20 @@
                     <p class="error" ng-show="this.newPost.$submitted && this.newPost.postBody.$invalid">Description of post</p>
                 </div>
                 <button type="submit" class="btn btn-default">Submit Post</button>
-              </form>
+            </form>
         </div>
         <!-- Start of Submit Post Form in body-->
 
 
         <!-- Start of Post in body-->
         <div ng-repeat="post in posts | orderBy:sort.method | filter:search" class="row post well well-lg">
-          <div class="col-md-2">
+            <div class="col-md-2">
                 <img ng-src="{{post.image}}" alt="{{post.title}}" width="140px" />
             </div>
 
             <div class="col-md-10">
-              <div class="row title">
-                  <h3>{{currentTime}}{{post.title}}
+                <div class="row title">
+                    <h3>{{currentTime}}{{post.title}}
                     <span ng-click="upvotePost(post)" class="comment-link glyphicon glyphicon-plus-sign"></span>
                     <span ng-click="downvotePost(post)" class="comment-link glyphicon glyphicon-minus-sign"></span>
                     <span ng-class="{
@@ -97,28 +99,80 @@
                       zero: post.upvotes === 0}">{{post.upvotes}}
                     </span>
                   </h3>
-              </div>
-                <div class="row author">
-                    <p class="pull-right">By {{post.author}}</p>
                 </div>
-                <div class="row body">
-                    <p>{{post.body}}</p>
-                </div>
+                <div>
+                    <div class="row author">
+                        <p class="pull-right">By {{post.author}}</p>
+                    </div>
+                    <div class="row body">
+                        <p>{{post.body}}</p>
+                        <!--end of post-->
+
+                    </div>
+</div>
+                    <!--Start of comments row in posts box-->
+                    <div class="row date-comments">
+                        <div>
+                            <p>{{post.date}}</p>
+<hr>
+                            <!-- toggle comment show -->
+                            <div ng-app="ngAnimate">
+                              <div class="comment-link" ng-click="commentShow(post)"><span class="glyphicon glyphicon-comment"></span>
+                                  <ng-pluralize count="post.comments.length" when="{'0': '{} Comments',
+                                    'one': '{} Comment',
+                                    'other': '{} Comments'}">
+                                  </ng-pluralize>
+                              <input type="checkbox" ng-model="checked" aria-label="Toggle ngHide"><br/>
+                              <div class="check-element animate-show" ng-show="checked">
+                                <div ng-repeat="comment in post.comments">
+                                      <div class="row author">
+                                          <p class="pull-right">By {{comment.author}}</p>
+                                      </div>
+                                      <div class="row body">
+                                          <p>{{comment.text}}</p>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                          </div>
+                          <!-- toggle checkbox example -->
+
+                            <!--comment show-->
+                            <!-- <div ng-repeat="comment in post.comments">
+                                  <div class="row author">
+                                      <p class="pull-right">By {{comment.author}}</p>
+                                  </div>
+                                  <div class="row body">
+                                      <p>{{comment.text}}</p>
+                                  </div>
+                                </div>
+                            </div> -->
+
+                            <!--add comment-->
+                              <hr>
+                            <div class="comment-link">
+                              <span class="glyphicon glyphicon-pencil"></span> Add Comment
+                            </div>
+                        </div>
+                    </div>
+
             </div>
-            <!-- End of Post in body-->
+            <!-- End of Post Box-->
 
-            <!-- Start of Comment-->
-
-            <!-- Start of Comment-->
 
         </div>
+    </div>
 
-        <!-- scripts -->
-        <!-- Scripts -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-        <script src="./script.js"></script>
+
+    </div>
+
+    <!-- scripts -->
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="./script.js"></script>
 
 </body>
 
