@@ -1,0 +1,9 @@
+{
+  "name": "minicolors-angular",
+  "version": "0.0.1",
+  "description": "AngularJS directive for jQuery MiniColors",
+  "license": "MIT",
+  "dependencies": {
+    "jquery-minicolors": "~2.1.6"
+  }
+}
