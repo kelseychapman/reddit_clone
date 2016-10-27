@@ -1,5 +1,6 @@
 // create the module
 const app = angular.module('redditApp', []);
+// $('INPUT.minicolors').minicolors(settings);
 
 app.controller('MainController', ['$scope','$log',function($scope,$log){
 
@@ -22,20 +23,32 @@ app.controller('MainController', ['$scope','$log',function($scope,$log){
 	}
 }
 
+//drop down sorting menu in nav
+$scope.sort = {
+		method: '-upvotes',
+		sortName: 'Votes'
+	}
 
-	//drop down sorting menu in nav
-  $scope.sortByDate = function() {
-    $scope.sort = {
-      method: '-date',
-      sortName: 'Date'
-    }
-  }
-  $scope.sortByTitle = function() {
-    $scope.sort = {
-      method: 'title',
-      sortName: 'Title'
-    }
-  }
+$scope.sortByVotes = function() {
+	$scope.sort = {
+				method: '-upvotes',
+				sortName: 'Votes'
+			}
+		}
+
+
+$scope.sortByDate = function() {
+	$scope.sort = {
+		method: '-date',
+		sortName: 'Date'
+	}
+}
+$scope.sortByTitle = function() {
+	$scope.sort = {
+		method: 'title',
+		sortName: 'Title'
+	}
+}
 
 //toggle form for submitting a post
 $scope.showForm = false
@@ -56,26 +69,24 @@ $scope.toggleForm = function (){
   }
 
 
-	$scope.sort = {
-	    method: '-upvotes',
-	    sortName: 'Votes'
-	  }
 
+//comment show
+$scope.commentShow = function(post) {
+	if (post.commentsVisible === false) {
+	  post.commentsVisible = true;
+	} else {
+	  post.commentsVisible = false;
+	}
+}
 
-	$scope.sortByVotes = function() {
-	  $scope.sort = {
-	      method: '-upvotes',
-	      sortName: 'Votes'
-	    }
-	  }
-
-		$scope.commentShow = function(post) {
-	    if (post.commentsVisible === false) {
-	      post.commentsVisible = true;
-	    } else {
-	      post.commentsVisible = false;
-	    }
-	  }
+//add new comment showForm$scope.commentShow = function(post) {
+$scope.newCommentShow = function(post) {
+	if (post.newCommentsVisible === false) {
+	  post.newCommentsVisible = true;
+	} else {
+	  post.newCommentsVisible = false;
+	}
+}
 
 //colorpicker
 		angular.module('minicolors-angular', [])
@@ -102,6 +113,30 @@ $scope.toggleForm = function (){
 		      }
 		    };
 		  });
+
+//comments
+$scope.toggleCommentForm = function(post) {
+    if (post.commentFormVisible === false) {
+      post.commentFormVisible = true;
+    } else {
+      post.commentFormVisible = false;
+    }
+  }
+
+	$scope.addComment = function(post, commentForm) {
+    if (commentForm.$valid) {
+      let comment = {
+        author: $scope.commentAuthor,
+        text: $scope.commentText
+      }
+      post.comments.push(comment);
+      $scope.toggleCommentForm(post);
+      $scope.commentShow(post);
+      commentForm.$setPristine();
+      $scope.commentAuthor = '';
+      $scope.commentText = '';
+    }
+  }
 
 
 //seeding post info
